@@ -1,6 +1,7 @@
 import {createChoreography} from './choreography.js';
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+const icon = name => `<svg class="ui-icon" aria-hidden="true"><use href="#icon-${name}"></use></svg>`;
 const projects = {
   mudra: {name:'Apartamento Mudra', type:'FOTOGRAFIAS / RESIDENCIAL', copy:'Madeira clara, texturas e formas suaves em uma composição de interiores que convida a permanecer.', source:'https://archtrends.com/projeto/shailla-fernandes/apartamento-mudra/109868', alts:['Sala de estar do Apartamento Mudra, com madeira clara e mobiliário de linhas curvas','Detalhe da bancada, marcenaria e prateleiras no Apartamento Mudra']},
   clinica: {name:'Clínica de cirurgia plástica', type:'FOTOGRAFIAS / BARRA DA TIJUCA', copy:'Preto, branco e madeira compõem os ambientes desta clínica de cirurgia plástica na Barra da Tijuca, no Rio de Janeiro.', source:'https://archtrends.com/projeto/shailla-fernandes/clinica-cirurgia-plrastica-rio-de-janeiro/101541', alts:['Recepção de clínica com sofá curvo branco, balcão escuro e grandes janelas','Consultório com bancada em pedra escura e painel de linhas verticais']},
@@ -134,7 +135,7 @@ function disposeMotion() {
 async function configureMotion() {
   disposeMotion();const current= generation;
   const paused=reduced();document.body.dataset.motion=paused?'off':'on';
-  $('#motion-toggle').setAttribute('aria-pressed',String(paused));$('#motion-toggle').innerHTML=paused?'Ativar animações <span aria-hidden="true">▷</span>':'Pausar animações <span aria-hidden="true">Ⅱ</span>';
+  $('#motion-toggle').setAttribute('aria-pressed',String(paused));$('#motion-toggle').innerHTML=paused?`Ativar animações ${icon('play')}`:`Pausar animações ${icon('pause')}`;
   $('#motion-toggle').disabled=systemReduce.matches;
   if(systemReduce.matches)$('#motion-toggle').textContent='Movimento reduzido pelo sistema';
   if(paused)return;
